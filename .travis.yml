@@ -5,7 +5,7 @@ install:
   - cd buck
   - ant
   - cd $TRAVIS_BUILD_DIR
-script: /tmp/buck/bin/buck test --all
+script: /tmp/buck/bin/buck test --all > /dev/null
 jdk:
   - openjdk7
   - oraclejdk7
