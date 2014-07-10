@@ -1,0 +1,7 @@
+def spring_boot_manifest(name, start_class):
+    genrule(
+        name=name,
+        out='MANIFEST.MF',
+        bash='echo "Start-Class: %s" > $OUT' % start_class
+    )
+

@@ -1,0 +1,42 @@
+java_library(
+    name = 'langdetect',
+    srcs = [
+        'Command.java',
+        'DetectorFactory.java',
+        'Detector.java',
+        'GenProfile.java',
+        'LangDetectException.java',
+        'Language.java',
+        'util/LangProfile.java',
+        'util/Messages.java',
+        'util/NGram.java',
+        'util/TagExtractor.java',
+    ],
+    resources = glob(['profiles/*']) + [
+        'util/messages.properties',
+    ],
+    deps = [
+        '//third_party/java/guava:guava',
+        '//third_party/java/language-detection-v2:jsonic-1.2.0-jar',
+    ],
+    visibility = [
+        'PUBLIC'
+    ],
+)
+
+java_test(
+    name = 'langdetect_test',
+    srcs = [
+        'DetectorTest.java',
+        'LanguageTest.java',
+        'ProfilesTest.java',
+        'util/LangProfileTest.java',
+        'util/NGramTest.java',
+        'util/TagExtractorTest.java',
+    ],
+    deps = [
+        ':langdetect',
+        '//third_party/java/junit:junit',
+        '//third_party/java/hamcrest:hamcrest',
+    ]
+)

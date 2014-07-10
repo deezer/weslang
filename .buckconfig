@@ -1,0 +1,4 @@
+[buildfile]
+    includes = //DEFS
+[java]
+    src_roots = /java/, /javatests/, src

@@ -1,0 +1,32 @@
+project_url: https://code.google.com/p/language-detection/
+author: Cybozu Labs, Inc.
+license: Apache 2.0
+version: ?
+clone_command: git clone https://code.google.com/p/language-detection/
+
+modified_files:
+  src/com/cybozu/labs/langdetect/DetectorFactory.java: Added method loadDefaultProfiles to load the profiles directly from the jar.
+  src/com/cybozu/labs/langdetect/Detector.java: >
+                                                   Detector now is deterministic and processes the whole input.
+                                                   Replaced ArrayList with List.
+                                                   Replaced StringBuffer with StringBuilder.
+                                                   Removed maximum length constraint.
+                                                   append now does all the cleanup with a single REGEX and does not normalize vietnamese.
+                                                   Use Arrays.copyOf to copy arrays.
+                                                   Use Arrays.fill to initialize array.
+                                                   Remove unneeded check from updateLangProb.
+                                                   sortProbabilities now uses Collections.sort.
+  src/com/cybozu/labs/langdetect/DetectorTest.java: >
+                                                       Changed order of assert, first should be the expected value.
+                                                       Changed multiple asserts to list asserts.
+  src/com/cybozu/labs/langdetect/util/NGram.java: >
+                                                     Replaced the StringBuffer with a single char array.
+                                                     Replaced HashMap with Map.
+
+added_files:
+  src/com/cybozu/labs/langdetect/ProfilesTest.java: Test based on the unittest data of CLD2 (https://code.google.com/p/cld2/).
+  profiles/profiles.txt: list of available profiles to be used when loading them from the jar.
+  src/com/cybozu/labs/langdetect/profiles: symbolic link to the profiles folder.
+
+downloaded_files:
+  europarl.test: https://language-detection.googlecode.com/git-history/packages/packages/europarl-test.zip

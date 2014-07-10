@@ -1,0 +1,101 @@
+include_defs('//third_party/java/spring-boot/DEFS')
+
+java_library(
+    name = 'detection_service_interface',
+    srcs = [
+        'DetectionResult.java',
+        'DetectionService.java',
+    ],
+    visibility = [
+        'PUBLIC',
+    ],
+)
+
+java_library(
+    name = 'detection_service_cld2',
+    srcs = [
+        'DetectionServiceImplCld2.java',
+    ],
+    deps = [
+        '//java/com/deezer/research/cld2:cld2',
+    ],
+    exported_deps = [
+        ':detection_service_interface',
+    ],
+    provided_deps = [
+        '//third_party/java/spring-boot:spring-boot-deps',
+    ],
+    visibility = [
+        'PUBLIC',
+    ],
+)
+
+java_library(
+    name = 'detection_service_language_detection',
+    srcs = [
+        'DetectionServiceImplLanguageDetection.java',
+    ],
+    deps = [
+        '//third_party/java/language-detection-v2:langdetect',
+    ],
+    exported_deps = [
+        ':detection_service_interface',
+    ],
+    provided_deps = [
+        '//third_party/java/spring-boot:spring-boot-deps',
+    ],
+    visibility = [
+        'PUBLIC',
+    ],
+)
+
+java_library(
+    name = 'detection_service',
+    srcs = [
+        'DetectionServiceImpl.java',
+    ],
+    deps = [
+        ':detection_service_cld2',
+        ':detection_service_language_detection',
+    ],
+    exported_deps = [
+        ':detection_service_interface',
+    ],
+    provided_deps = [
+        '//third_party/java/spring-boot:spring-boot-deps',
+    ],
+    visibility = [
+        'PUBLIC',
+    ],
+)
+
+java_library(
+    name = 'detection',
+    srcs = [
+        'DetectionController.java',
+        'DetectionConfiguration.java',
+    ],
+    deps = [
+        ':detection_service',
+    ],
+    provided_deps = [
+        '//third_party/java/spring-boot:spring-boot-deps',
+    ],
+    visibility = [
+        'PUBLIC',
+    ],
+)
+
+java_binary(
+    name = 'detection_app',
+    deps = [
+        ':detection',
+        '//third_party/java/spring-boot:spring-boot',
+    ],
+    manifest_file = ':manifest',
+)
+
+spring_boot_manifest(
+    name = 'manifest',
+    start_class = 'com.deezer.research.language.DetectionConfiguration'
+)

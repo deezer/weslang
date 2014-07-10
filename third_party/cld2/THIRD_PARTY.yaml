@@ -1,0 +1,8 @@
+project_url: https://code.google.com/p/cld2/
+author: Google Inc.
+license: Apache 2.0
+version: 2.0
+
+added_files:
+  compile2buck.py: script to convert the build scripts to BUCK rules.
+  DEFS: buck rules for building cpp binaries, libraries and tests.

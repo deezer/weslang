@@ -1,0 +1,33 @@
+prebuilt_jar(
+    name = 'spring-boot',
+    binary_jar = 'spring-boot-1.1.4.jar',
+    visibility = [
+        'PUBLIC'
+    ],
+)
+
+prebuilt_jar(
+    name = 'spring-boot-deps',
+    binary_jar = 'spring-boot-deps-1.1.4.jar',
+    visibility = [
+        'PUBLIC'
+    ],
+)
+
+prebuilt_jar(
+    name = 'spring-test',
+    binary_jar = 'spring-test-4.0.5.RELEASE.jar',
+    visibility = [
+        'PUBLIC'
+    ],
+)
+
+java_library(
+    name = 'spring-boot-test',
+    exported_deps = [
+        ':spring-test',
+    ],
+    visibility = [
+        'PUBLIC'
+    ],
+)

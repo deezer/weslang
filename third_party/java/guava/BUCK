@@ -1,0 +1,9 @@
+prebuilt_jar(
+    name = 'guava',
+    binary_jar = 'guava-17.0.jar',
+    source_jar = 'guava-17.0-sources.jar',
+    javadoc_url = 'http://docs.guava-libraries.googlecode.com/git-history/release17/javadoc/index.html',
+    visibility = [
+        'PUBLIC',
+    ],
+)

@@ -1,0 +1,76 @@
+java_library(
+    name = 'test_utils',
+    srcs = [
+        'BaseTest.java',
+        'TestData.java',
+    ],
+    deps = [
+        '//third_party/java/junit:junit',
+    ],
+    exported_deps = [
+        '//java/com/deezer/research/language:detection_service_interface',
+    ],
+)
+
+java_test(
+    name = 'detection_service_cld2_test',
+    srcs = [
+        'DetectionServiceImplCld2Test.java',
+    ],
+    deps = [
+        ':test_utils',
+        '//java/com/deezer/research/language:detection_service_cld2',
+        '//third_party/java/junit:junit',
+    ],
+)
+
+java_test(
+    name = 'detection_service_language_detection_test',
+    srcs = [
+        'DetectionServiceImplLanguageDetectionTest.java',
+    ],
+    deps = [
+        ':test_utils',
+        '//java/com/deezer/research/language:detection_service_language_detection',
+        '//third_party/java/junit:junit',
+    ],
+)
+
+java_test(
+    name = 'detection_service_test',
+    srcs = [
+        'DetectionServiceImplTest.java',
+    ],
+    deps = [
+        ':test_utils',
+        '//java/com/deezer/research/language:detection_service',
+        '//third_party/java/junit:junit',
+        '//third_party/java/spring-boot:spring-boot-deps',
+    ],
+)
+
+java_test(
+    name = 'detection_test',
+    srcs = [
+        'DetectionTest.java',
+    ],
+    deps = [
+        ':test_utils',
+        '//java/com/deezer/research/language:detection',
+        '//java/com/deezer/research/language:detection_service',
+        '//third_party/java/spring-boot:spring-boot-deps',
+        '//third_party/java/spring-boot:spring-boot-test',
+        '//third_party/java/junit:junit',
+    ],
+)
+
+java_test(
+    name = 'detection_result_test',
+    srcs = [
+        'DetectionResultTest.java',
+    ],
+    deps = [
+        '//java/com/deezer/research/language:detection_service_interface',
+        '//third_party/java/junit:junit',
+    ],
+)

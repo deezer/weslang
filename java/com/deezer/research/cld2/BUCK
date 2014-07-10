@@ -1,0 +1,32 @@
+java_library(
+    name = 'cld2',
+    srcs = [
+        'Cld2.java',
+        'Cld2Library.java',
+        'CLDHints.java',
+        'Encoding.java',
+        'Language.java',
+        'Result.java',
+    ],
+    deps = [
+        ':libcld2_jar',
+        '//third_party/java/jna:jna-4',
+    ],
+    visibility = [
+        'PUBLIC',
+    ]
+)
+
+prebuilt_jar(
+    name = 'libcld2_jar',
+    binary_jar = ':libcld2_jar_temp',
+)
+
+genrule(
+    name = 'libcld2_jar_temp',
+    deps = [
+        '//third_party/cld2:libcld2.so',
+    ],
+    bash = 'mkdir linux-x86-64 && cp $(location //third_party/cld2:libcld2.so) linux-x86-64 && zip $OUT linux-x86-64/libcld2.so',
+    out = 'libcld2.jar',
+)

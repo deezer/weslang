@@ -1,0 +1,17 @@
+project_url: http://projects.spring.io/spring-boot/
+author: Pivotal Software, Inc.
+license: Apache 2.0
+version: 1.1.4
+
+added_files:
+  generate-jars.sh: Script to generate base jars.
+  pom.xml: Configuration for base app.
+  application.properties: Sets actuator to un on localhost:9001.
+  DEFS: list of definitions to be used from external BUCK files.
+
+generated_files:
+  spring-boot-1.0.2.jar: Empty spring-boot app using Jetty.
+  spring-boot-deps-1.0.2.jar: Flattened spring-boot app to be used when building (it includes all required dependencies).
+
+downloaded_files:
+  spring-test-4.0.5.RELEASE.jar: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22spring-test%22

@@ -1,0 +1,27 @@
+This is a Java wrapper for the library CLD2 (https://code.google.com/p/cld2/)
+using JNA.
+
+Initially the classes CLDHints and Cld2Library were automatically generated
+using jnaerator (https://code.google.com/p/jnaerator/). To use it we needed to
+remove the include of <vector> as it crashed the app.
+
+Then we executed the following command:
+$ java -jar jnaerator-0.12-20140604.001151-54-shaded.jar -library Cld2 ~/language_detection/cld2/internal/generated_language.h ~/language_detection/cld2/public/encodings.h ~/language_detection/cld2/public/compact_lang_det.h -o . -v -noJar -noComp -runtime JNA -f -noComments
+
+Then using:
+$ nm libcld2_full.so
+we got the mangled cpp names and replaced those in Cld2Library, this is because
+of bug https://github.com/ochafik/nativelibs4java/issues/515.
+
+We also removed lot of undesired content and made the class protected.
+Note also, that we replaced the signature of ExtDetectLanguagesummary to use
+arrays. We only keep one function, as the others can be easily implemented on
+top of it.
+
+We also extracted both Enumerations to their own classes.
+
+In CLDHints, we replaced the pointers by strings and removed the references to
+byreference and bypointer.
+
+IMPORTANT: this bindings have only been tested for linux-x86-64, any other
+OSes and flavors are not explicitly supported.

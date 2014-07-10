@@ -1,0 +1,11 @@
+java_test(
+    name = 'cld2_test',
+    srcs = [
+        'Cld2Test.java',
+    ],
+    deps = [
+        '//java/com/deezer/research/cld2:cld2',
+        '//third_party/java/junit:junit',
+        '//third_party/java/hamcrest:hamcrest',
+    ],
+)

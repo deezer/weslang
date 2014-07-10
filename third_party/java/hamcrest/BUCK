@@ -1,0 +1,10 @@
+prebuilt_jar(
+    name = 'hamcrest',
+    binary_jar = 'hamcrest-all-1.3.jar',
+    source_jar = 'hamcrest-all-1.3-sources.jar',
+    javadoc_url = 'http://hamcrest.org/JavaHamcrest/javadoc/1.3/',
+    visibility = [
+        '//javatests/...',
+        '//third_party/java/...',
+    ]
+)

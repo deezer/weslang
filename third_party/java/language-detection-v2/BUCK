@@ -1,0 +1,28 @@
+java_binary(
+    name = 'langdetect_app',
+    deps = [
+        '//third_party/java/language-detection-v2/src/com/cybozu/labs/langdetect:langdetect',
+    ],
+    main_class = 'com.cybozu.labs.langdetect.Command',
+    visibility = [
+        'PUBLIC'
+    ],
+)
+
+java_library(
+    name = 'langdetect',
+    exported_deps = [
+        '//third_party/java/language-detection-v2/src/com/cybozu/labs/langdetect:langdetect',
+    ],
+    visibility = [
+        'PUBLIC'
+    ],
+)
+
+prebuilt_jar(
+    name = 'jsonic-1.2.0-jar',
+    binary_jar = 'lib/jsonic-1.2.0.jar',
+    visibility = [
+        '//third_party/java/language-detection-v2/src/com/cybozu/labs/langdetect:langdetect'
+    ],
+)

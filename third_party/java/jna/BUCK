@@ -1,0 +1,9 @@
+prebuilt_jar(
+    name = 'jna-4',
+    binary_jar = 'jna-4.1.0.jar',
+    source_jar = 'jna-4.1.0-sources.jar',
+    javadoc_url = 'https://twall.github.io/jna/4.1.0/',
+    visibility = [
+        'PUBLIC',
+    ],
+)

@@ -1,0 +1,57 @@
+# Copyright 2014-present Deezer.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+def cpp_binary(name, out, srcs=[], flags=['-O2', '-m64'], visibility=[], deps=[]):
+    for d in deps:
+        if ':lib' not in d or not d.endswith('.so'):
+            print 'Invalid dependency %s: expected :lib<name>.so' % d
+            return
+    genrule(
+        name = name,
+        out = out,
+        srcs = srcs,
+        cmd = 'g++ %s $SRCS %s -o $OUT' % (' '.join(flags), ' '.join('$(location %s)' % dep for dep in deps)),
+        visibility = visibility,
+    )
+
+def cpp_library(name, srcs=[], flags=[], visibility=[], deps=[]):
+    if 'lib' not in name or not name.endswith('.so'):
+            print 'Invalid name %s: expected lib<name>.so' % d
+            return
+    flags.extend(['-shared', '-fPIC'])
+    cpp_binary(
+        name = name,
+        out = name,
+        srcs = srcs,
+        flags = flags,
+        visibility = visibility,
+        deps = deps
+    )
+
+def cpp_test(name, srcs=[], flags=[], visibility=[], deps=[]):
+    temp_name = '%s__test' % name
+    cpp_binary(
+        name = temp_name,
+        out = temp_name,
+        srcs = srcs,
+        flags = flags,
+        visibility = [],
+        deps = deps,
+    )
+
+    sh_test(
+        name = name,
+        test = ':%s' % temp_name,
+        visibility = visibility,
+    )
