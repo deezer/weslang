@@ -3,3 +3,4 @@ buck-out/
 *~
 .git
 .svn
+.idea
