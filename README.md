@@ -103,6 +103,57 @@ Currently the Cld2 bindings are only generated for `linux-x86-64`, so if your
 machine is different it probably won't work. In such a case, just execute it
 with the `java_only` profile.
 
+Launch service using docker
+--------------------------
+The service can be also launched using docker. It requires the installation of `docker` and `docker-compose`. See [docker home page](https://docs.docker.com/) for installation references.
+
+Once docker is installed execute
+```bash
+$ docker-compose up -d
+```
+this will build the image of the service and launch it. To see on which port the service is exposed,
+execute `docker-compose ps`. This will display a table similar to the example below:
+```bash
+$ docker-compose ps
+    Name                   Command               State                        Ports
+----------------------------------------------------------------------------------------------------
+weslang_api_1   java -jar buck-out/gen/jav ...   Up      0.0.0.0:32774->8080/tcp
+```
+in above example, the service on port `8080` is exposed on port `32774`.
+
+On Mac OsX, docker runs on a VM. To know the actual ip, it can be executed the following command:
+```bash
+$ boot2docker ip
+192.168.59.103
+```
+in above example, the service can be queried by executing:
+```bash
+$ python -c "import urllib;\
+print(urllib.urlopen('http://192.168.59.103:32774/detect?q=hello%20world').read());" | \
+python -m json.tool
+{
+    "confidence": 0.7706013715278043,
+    "language": "en"
+}
+```
+
+The health endpoint running on port 9001 can be accessed by executing the following command:
+```bash
+$ docker exec CONTAINER_ID python -c "import urllib;\
+print(urllib.urlopen('http://127.0.0.1:9001/health').read());" | \
+python -m json.tool
+{
+    "status": "UP"
+}
+```
+the container id can be obtained by executing `docker ps`. For example:
+```bash
+$ docker ps
+CONTAINER ID        IMAGE                COMMAND                CREATED             STATUS ...
+a88826098461        weslang_api:latest   "java -jar buck-out/   21 hours ago        Up 21 hours
+```
+which outputs a CONTAINER_ID equals to `a88826098461`.
+
 Credits
 =======
 
