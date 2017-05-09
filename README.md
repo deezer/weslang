@@ -94,7 +94,7 @@ If for some reason you don't want or can't execute both detectors, you could
 run:
 
 ```bash
-$ java -jar detection_app.jar --spring.profiles.active=java_only
+$ java -jar detection_app.jar --spring.profiles.active=java-only
 $ java -jar detection_app.jar --spring.profiles.active=cld2
 $ java -jar detection_app.jar --spring.profiles.active=both
 ```
